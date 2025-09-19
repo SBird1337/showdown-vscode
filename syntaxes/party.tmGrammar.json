@@ -1,0 +1,126 @@
+{
+  "scopeName": "source.party",
+  "patterns": [{ "include": "#main" }],
+  "repository": {
+    "main": {
+      "patterns": [
+        { "include": "#comment" },
+        { "include": "#trainer-head" },
+        { "include": "#trainer-name-string" },
+        { "include": "#trainer-keyword-named" },
+        { "include": "#trainer-keyword-boolean" },
+        { "include": "#trainer-keyword-number" },
+        { "include": "#trainer-keyword-list" },
+        { "include": "#trainer-keyword-stats" }
+      ]
+    },
+    "trainer-head": {
+      "match": "^(===)\\s*([A-Z_0-9]+)\\s*(===)",
+      "captures": {
+        "1": {
+          "name": "keyword.party"
+        },
+        "2": {
+          "name": "meta.preprocessor.macro.party"
+        },
+        "3": {
+          "name": "keyword.party"
+        }
+      }
+    },
+    "trainer-name-string": {
+      "match": "^(Name):\\s*([\\w\\d &]*)\\s*$",
+      "captures": {
+        "1": {
+          "name": "support.class.party"
+        },
+        "2": {
+          "name": "string.party"
+        }
+      }
+    },
+    "trainer-keyword-named": {
+      "match": "^(Class|Pic|Gender|Music):\\s*([\\w\\d ]+)\\s*$",
+      "captures": {
+        "1": {
+          "name": "support.class.party"
+        },
+        "2": {
+          "name": "meta.preprocessor.macro.party"
+        }
+      }
+    },
+    "trainer-keyword-boolean": {
+      "match": "^(Double Battle):\\s*(Yes|No)\\s*$",
+      "captures": {
+        "1": {
+          "name": "support.class.party"
+        },
+        "2": {
+          "name": "constant.language.party"
+        }
+      }
+    },
+    "trainer-keyword-number": {
+      "match": "^(Level):\\s*(\\d+)\\s*$",
+      "captures": {
+        "1": {
+          "name": "support.class.party"
+        },
+        "2": {
+          "name": "constant.numeric.party"
+        }
+      }
+    },
+    "trainer-keyword-list": {
+      "begin": "^AI|^Items",
+      "end": "$",
+      "beginCaptures": {
+        "0": {
+          "name": "support.class.party"
+        }
+      },
+      "patterns": [ 
+        { 
+        "match": "[aA-zZ ]+",
+        "name": "meta.preprocessor.macro.party"
+        },
+        { 
+          "match": "\\/",
+          "name": "keyword.operator.party"
+        } 
+      ]
+    },
+    "trainer-keyword-stats": {
+      "begin": "^IVs|^EVs",
+      "end": "$",
+      "beginCaptures": {
+        "0": {
+          "name": "support.class.party"
+        }
+      },
+      "patterns": [ 
+        { 
+          "match": "(\\d+)\\s+(HP|Atk|Def|SpA|SpD|Spe)",
+          "captures": {
+            "1": {
+              "name": "constant.numeric.party"
+            },
+            "2": {
+              "name": "keyword.language.party"
+            }
+          }
+        },
+        { 
+          "match": "\\/",
+          "name": "keyword.operator.party"
+        } 
+      ]
+    },
+    "comment": {
+      "begin": "/\\*",
+      "end": "\\*/",
+      "name": "comment.block.party"
+    }
+  }
+}
